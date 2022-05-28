@@ -333,6 +333,16 @@ export default class Principal extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-3" >
+                                <div class="card">
+                                    <a href="/admin_validate"> <img class="card-img-top" src="https://www.aval.ec/wp-content/uploads/2018/12/aval.jpg" alt="" /></a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Crear administrador</h5>
+                                        {/* <p class="card-text">Validar el estado de las empresas registradas.</p> */}
+                                        {/* <a class="btn btn-primary" href="/registerstudent" role="button">Registrarse</a> */}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

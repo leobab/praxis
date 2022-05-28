@@ -3,30 +3,25 @@ import { If, Else } from 'react-if';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import $ from 'jquery';
+import Modalchangepass from './modalcambiarpass';
 
 import config from '../metodos/config_session';
 
-export default class Validateemp extends Component {
+export default class Validate_admin extends Component {
 
     state = {
-        empresas_validar: [],
+        admin_validar: [],
         conectado: false
     }
 
 
 
     async componentDidMount() {
-
-        const response = await axios.get('http://localhost:5000/emp/listar_empresas', config);
-
+        const response = await axios.get('http://localhost:5000/usuario/listar_admin', config);
         if (response.data.mensaje) {
-
-            this.setState({ conectado: true, empresas_validar: this.state.empresas_validar.concat(response.data.datos) });
-
+            this.setState({ conectado: true, admin_validar: this.state.admin_validar.concat(response.data.datos) });
         } else {
-
             this.setState({ conectado: false });
-
         }
 
         $('#example').DataTable({
@@ -52,22 +47,22 @@ export default class Validateemp extends Component {
                 "zeroRecords": "No se encontraron resultados",
                 "emptyTable": "Ningún dato disponible en esta tabla",
                 "aria": {
-                    "sortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sortAscending": ": Activar para ordenar la columna de manera ascendente",
                     "sortDescending": ": Activar para ordenar la columna de manera descendente"
                 },
-        }});
-
+            }
+        });
 
     }
 
-    async validar(emp_codigo_enviado) {
-        const response = await axios.post('http://localhost:5000/emp/validar_empresa', {
+    /* async validar(validar_empresa) {
+        const response = await axios.post('http://localhost:5000/usuario/validar_admin', {
             emp_codigo: emp_codigo_enviado
         }, config);
 
         if (response.data.mensaje) {
 
-            window.location.href = "/validateemp";
+            window.location.href = "/admin_validate";
 
         }else{
             var container = document.getElementById("containerErrores");
@@ -77,68 +72,60 @@ export default class Validateemp extends Component {
             el.innerHTML = "Error al validar empresa. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button>";
             container.append(el);
         }
-    }
+    } */
 
-    async eliminar(emp_codigo_enviado) {
-        const response = await axios.post('http://localhost:5000/emp/eliminar_empresa', {
-            emp_codigo: emp_codigo_enviado
+    async eliminar(usu_codigo_admin, usu_nombre_admin) {
+        const response = await axios.post('http://localhost:5000/usuario/eliminar_admin', {
+            usu_codigo: usu_codigo_admin,
+            usu_nombre: usu_nombre_admin
         }, config);
 
         if (response.data.mensaje) {
 
-            window.location.href = "/validateemp";
+            window.location.href = "/admin_validate";
 
-        }else{
+        } else {
             var container = document.getElementById("containerErrores");
             var el = document.createElement("div");
             el.className = "alert alert-danger alert-dismissible fade show";
             el.role = "alert";
-            el.innerHTML = "Error al borrar empresa. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button>";
+            el.innerHTML = "Error al borrar admin. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button>";
             container.append(el);
         }
     }
 
     render() {
 
-
         return (
 
             <div class="container mt-3 p-5" style={{ height: '100%' }}>
                 <div className='container mt-5' style={{ height: '500px' }}>
-                    <h6 style={{ textAlign: 'center' }}>Empresas por validar</h6>
+                    <h6 style={{ textAlign: 'center' }}>Cuentas de administrador</h6>
                     <hr></hr>
+                    <button type="button" class="btn btn-success">Crear administrador</button>
                     <div id="containerErrores" class="mt-3"></div>
                     <table id="example" class="display">
                         <thead>
                             <tr>
+                                <th>Código</th>
+                                <th>Correo</th>
                                 <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Categoría</th>
-                                <th className='text-center'>Ubicación</th>
-                                <th className='text-center'>Convenio</th>
-                                <th className='text-center'>Estado</th>
+                                <th className='text-center'>Cédula</th>
+                                <th className='text-center'>Teléfono</th>
                                 <th className='text-center' style={{ width: '100px' }}>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                this.state.empresas_validar.map(empresas_validar => (
+                                this.state.admin_validar.map(admin_validar => (
                                     <tr>
-                                        <td>{empresas_validar.usu_nombre}</td>
-                                        <td>{empresas_validar.emp_descripcion}</td>
-                                        <td>{empresas_validar.emp_categoria}</td>
-                                        <td className='text-center'>{empresas_validar.usu_direccion}</td>
-                                        <td className='text-center'>{empresas_validar.emp_convenio}</td>
-                                        <td className='text-center'>{empresas_validar.emp_estado}</td>
-                                        <If condition={empresas_validar.emp_estado === 'NO VALIDADO'}>
-                                            
-                                            <td className='text-center'><button type="button" onClick={() => this.validar(empresas_validar.usu_codigo)} title='Validar empresa' class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                            <button type="button" onClick={() => this.eliminar(empresas_validar.usu_codigo)} title='Eliminar empresa' class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                                        </If>
-                                        <If condition={empresas_validar.emp_estado === 'VALIDADO'}>
-                                            
-                                            <td className='text-center'><button type="button" onClick={() => this.eliminar(empresas_validar.usu_codigo)} title='Eliminar empresa' class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                                        </If>
+                                        <td>{admin_validar.usu_codigo}</td>
+                                        <td>{admin_validar.usu_correo}</td>
+                                        <td>{admin_validar.usu_nombre}</td>
+                                        <td className='text-center'>{admin_validar.usu_cedula_ruc}</td>
+                                        <td className='text-center'>{admin_validar.usu_telefono}</td>
+                                        <td className='text-center'><button type="button" onClick={() => this.eliminar(admin_validar.usu_codigo, admin_validar.usu_nombre)} title='Eliminar admin' class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                        
 
 
 

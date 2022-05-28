@@ -186,6 +186,7 @@ export default class navegation extends Component {
                                             <div className="dropdown-menu">
                                                 <button className="dropdown-item" onClick={() => this.ver_perfil()} ><i class="fa fa-user" aria-hidden="true"></i> Perfil</button>
                                                 <button className="dropdown-item" onClick={() => this.ver_opciones()} ><i class="fa fa-cog" aria-hidden="true"></i> Opciones</button>
+                                                <button className="dropdown-item" onClick={() => this.ver_opciones()} ><i class="fa fa-cog" aria-hidden="true"></i> Opciones</button>
                                                 <button className="dropdown-item" to="" onClick={() => this.salir()}><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</button>
                                             </div>
                                         </If>
@@ -193,12 +194,14 @@ export default class navegation extends Component {
                                             <div className="dropdown-menu">
                                                 <button className="dropdown-item" onClick={() => this.ver_perfil()} ><i class="fa fa-building" aria-hidden="true"></i> Perfil</button>
                                                 <button className="dropdown-item" onClick={() => this.ver_opciones()} ><i class="fa fa-cog" aria-hidden="true"></i> Opciones</button>
+                                                <button className="dropdown-item" onClick={() => this.ver_opciones()} ><i class="fa fa-cog" aria-hidden="true"></i> Opciones</button>
                                                 <button className="dropdown-item" to="" onClick={() => this.salir()}><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</button>
                                             </div>
                                         </If>
                                         <If condition={this.state.usu_tipo === "admin"}>
                                             <div className="dropdown-menu">
                                                 <button className="dropdown-item" onClick={() => this.ver_opciones()} ><i class="fa fa-cog" aria-hidden="true"></i> Opciones</button>
+                                                <button className="dropdown-item" onClick={() => this.ver_opciones()} ><i class="fa fa-cog" aria-hidden="true"></i> Cambiar contraseña n</button>
                                                 <button className="dropdown-item" to="" onClick={() => this.salir()}><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</button>
                                             </div>
                                         </If>

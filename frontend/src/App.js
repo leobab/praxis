@@ -33,6 +33,7 @@ import Editprofilealum from './components/editprofilealum';
 import Logs from './components/logs';
 import ValidatePost from './components/validatepost';
 import Footer from './components/footer';
+import valid_admin from './components/admin_validate';
 
 import './css/App.css'
 import './css/App2.css'
@@ -74,6 +75,7 @@ function App() {
         <Route path="/editprofile/:id" component={Editprofilealum}/>
         <Route path="/logs" component={Logs} />
         <Route path="/validate_post" component={ValidatePost} />
+        <Route path="/admin_validate" component={valid_admin} />
 
 
         {/* <Route path="/principal" component={Principal} />
